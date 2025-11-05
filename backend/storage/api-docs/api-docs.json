@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "/api",
+            "url": "/",
             "description": "Base path des routes API"
         }
     ],
@@ -105,7 +105,12 @@
                     "422": {
                         "description": "Validation error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/logout": {
@@ -115,6 +120,337 @@
                 ],
                 "summary": "Logout",
                 "operationId": "fe8f3429cd6979b3b4517e186505f9f9",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/cours": {
+            "get": {
+                "tags": [
+                    "Cours"
+                ],
+                "summary": "Lister les cours",
+                "operationId": "1e958664e8f761cc671e219f58e2efc2",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cours"
+                ],
+                "summary": "Créer un cours",
+                "operationId": "af2ee7a8fad944b7401cb222e6b59d1f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nom_cours",
+                                    "prof_id",
+                                    "salle",
+                                    "date",
+                                    "heure_debut",
+                                    "heure_fin",
+                                    "semestre"
+                                ],
+                                "properties": {
+                                    "nom_cours": {
+                                        "type": "string"
+                                    },
+                                    "prof_id": {
+                                        "type": "integer"
+                                    },
+                                    "salle": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "heure_debut": {
+                                        "type": "string"
+                                    },
+                                    "heure_fin": {
+                                        "type": "string"
+                                    },
+                                    "semestre": {
+                                        "type": "string"
+                                    },
+                                    "etudiant_ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/cours/{id}": {
+            "get": {
+                "tags": [
+                    "Cours"
+                ],
+                "summary": "Afficher un cours",
+                "operationId": "b2b2e896d2abd88729347fe8dfd307dc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cours"
+                ],
+                "summary": "Mettre à jour un cours",
+                "operationId": "3fd77d63f837d2a339e8c7aca246351f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom_cours": {
+                                        "type": "string"
+                                    },
+                                    "prof_id": {
+                                        "type": "integer"
+                                    },
+                                    "salle": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "heure_debut": {
+                                        "type": "string"
+                                    },
+                                    "heure_fin": {
+                                        "type": "string"
+                                    },
+                                    "semestre": {
+                                        "type": "string"
+                                    },
+                                    "etudiant_ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cours"
+                ],
+                "summary": "Supprimer un cours",
+                "operationId": "8a7c2ca80f3404c4f982f192921c1e90",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/cours/{id}/publish": {
+            "post": {
+                "tags": [
+                    "Cours"
+                ],
+                "summary": "Publier un cours et notifier",
+                "operationId": "0510c91022fec7aa0a7bb856607850a2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/emplois": {
+            "get": {
+                "tags": [
+                    "Emplois"
+                ],
+                "summary": "Lister les emplois du temps",
+                "operationId": "27cda9d81e48681e9c246d290428a02e",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/emplois/{user_id}": {
+            "get": {
+                "tags": [
+                    "Emplois"
+                ],
+                "summary": "Afficher l'emploi du temps d'un utilisateur",
+                "operationId": "df597cb1330b5f27c7950eba0756206a",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/notifications/{user_id}": {
+            "get": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Lister les notifications d'un utilisateur",
+                "operationId": "76d4aca0d130356d37e25663fa84ada0",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/notifications/{id}/read": {
+            "put": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Marquer une notification comme lue",
+                "operationId": "14ca05f271f4c57f1f368b868ab34446",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -327,6 +663,34 @@
         }
     },
     "components": {
+        "schemas": {
+            "Notification": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "app"
+                    },
+                    "lu": {
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "sanctum": {
                 "type": "http",
@@ -341,6 +705,18 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Cours",
+            "description": "Cours"
+        },
+        {
+            "name": "Emplois",
+            "description": "Emplois"
+        },
+        {
+            "name": "Notifications",
+            "description": "Notifications"
         },
         {
             "name": "Users",

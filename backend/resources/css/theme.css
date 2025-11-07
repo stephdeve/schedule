@@ -1,0 +1,112 @@
+/* Academic Material Design 3 Theme */
+:root {
+  /* Color Palette */
+  --primary: #1565C0;
+  --primary-light: #5E92F3;
+  --primary-dark: #003C8F;
+  --secondary: #00796B;
+  --secondary-light: #48A999;
+  --secondary-dark: #004C40;
+  --surface: #FFFFFF;
+  --background: #F5F7FA;
+  --on-primary: #FFFFFF;
+  --on-secondary: #FFFFFF;
+  --on-surface: #212121;
+  
+  /* Typography */
+  --font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
+  --headline1: 2rem 500;
+  --headline2: 1.75rem 500;
+  --headline3: 1.5rem 500;
+  --body1: 1rem 400;
+  --body2: 0.875rem 400;
+  
+  /* Spacing & Shapes */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --elevation-low: 0 1px 2px rgba(0,0,0,0.08);
+  --elevation-medium: 0 4px 8px rgba(0,0,0,0.12);
+  --elevation-high: 0 8px 16px rgba(0,0,0,0.16);
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-family);
+  color: var(--on-surface);
+  background-color: var(--background);
+  line-height: 1.6;
+}
+
+h1 { font: var(--headline1); }
+h2 { font: var(--headline2); }
+h3 { font: var(--headline3); }
+p, li { font: var(--body1); }
+
+/* Academic Elements */
+.academic-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%23e0e0e0' d='M50,0 C77.6,0 100,22.4 100,50 C100,77.6 77.6,100 50,100 C22.4,100 0,77.6 0,50 C0,22.4 22.4,0 50,0 Z M50,10 C27.9,10 10,27.9 10,50 C10,72.1 27.9,90 50,90 C72.1,90 90,72.1 90,50 C90,27.9 72.1,10 50,10 Z'/%3E%3C/svg%3E");
+  background-size: 120px;
+  opacity: 0.05;
+}
+
+/* Material Components */
+.card {
+  background: var(--surface);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--elevation-low);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--elevation-medium);
+}
+
+.btn {
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+/* Floating labels */
+.float-label-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.float-label-group label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #777;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.float-label-group input:focus ~ label,
+.float-label-group input:not(:placeholder-shown) ~ label {
+  top: -0.5rem;
+  left: 0.8rem;
+  font-size: 0.75rem;
+  background: var(--surface);
+  padding: 0 0.5rem;
+  color: var(--primary);
+}

@@ -32,7 +32,7 @@ if (class_exists(\Livewire\Component::class)) {
 
         public function render()
         {
-            return view('livewire.admin.dashboard');
+            return view('livewire.admin.dashboard')->layout('layouts.app');
         }
     }
 } else {
@@ -45,3 +45,4 @@ if (class_exists(\Livewire\Component::class)) {
         }
     }
 }
+

@@ -1,18 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebAuthController;
+use App\Http\Controllers\AdminController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', fn () => view('welcome'));
 
-// Admin Dashboard (Livewire v3 component, accessible une fois Livewire installé)
-if (class_exists('Livewire\\Livewire', false)) {
+// Auth web (session)
+
+Route::get('/setup', [WebAuthController::class, 'showSetupForm'])->name('setup');
+Route::post('/setup', [WebAuthController::class, 'setupAdmin'])->name('setup.submit');
+Route::get('/login', [WebAuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [WebAuthController::class, 'login'])->name('login.submit');
+Route::post('/logout', [WebAuthController::class, 'logout'])->name('logout');
+
+// Admin Dashboard (Livewire si présent, sinon fallback Blade)
+if (class_exists(\Livewire\Livewire::class)) {
     Route::get('/admin', \App\Livewire\Admin\Dashboard::class)
-        ->middleware(['role:admin'])
+        ->middleware(['auth', 'role:admin'])
         ->name('admin.dashboard');
 } else {
-    Route::get('/admin', function () {
-        return 'Dashboard Livewire indisponible (package non installé)';
-    })->middleware(['role:admin'])->name('admin.dashboard');
+    Route::get('/admin', [AdminController::class, 'index'])
+        ->middleware(['auth', 'role:admin'])
+        ->name('admin.dashboard');
 }

@@ -25,6 +25,9 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     // Cours CRUD + publication (admin)
     Route::apiResource('cours', CoursController::class);
     Route::post('cours/{id}/publish', [CoursController::class, 'publish']);
+
+    // Emplois: publier un emploi du temps (liste de cours)
+    Route::post('/emplois/publier', [EmploiController::class, 'publish']);
 });
 
 // Emploi du temps

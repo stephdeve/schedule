@@ -35,4 +35,24 @@ return [
         ],
     ],
 
+    // Optional SMS provider configuration
+    'sms' => [
+        'provider' => env('SMS_PROVIDER'), // e.g. 'twilio' or 'vonage'
+        'twilio' => [
+            'sid' => env('TWILIO_SID'),
+            'token' => env('TWILIO_TOKEN'),
+            'from' => env('TWILIO_FROM'),
+        ],
+        'vonage' => [
+            'key' => env('VONAGE_KEY'),
+            'secret' => env('VONAGE_SECRET'),
+            'from' => env('VONAGE_FROM'),
+        ],
+    ],
+
+    // Optional Firebase Cloud Messaging configuration
+    'fcm' => [
+        'server_key' => env('FCM_SERVER_KEY'),
+    ],
+
 ];
